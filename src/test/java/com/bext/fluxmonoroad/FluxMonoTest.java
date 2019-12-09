@@ -2,6 +2,7 @@ package com.bext.fluxmonoroad;
 
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 class FluxMonoTest {
@@ -62,5 +63,14 @@ class FluxMonoTest {
                 .expectNext("Elemento1","Elemento2","Elemento3")
                 .expectErrorMessage("Exception generated voluntarily")
                 .verify();
+    }
+
+    @Test
+    void monoTest(){
+        Mono<String> monoString = Mono.just("unico");
+
+        StepVerifier.create( monoString.log())
+                .expectNext("unico")
+                .verifyComplete();
     }
 }
