@@ -12,6 +12,8 @@ class FluxMonoTest {
                 .concatWith( Flux.error( new RuntimeException("Exception generated voluntarily")))
                 .concatWith( Flux.just("Esto NO se Mostara"))
                 .log();
-        fluxString.subscribe(System.out::println, ex ->System.err.println("El error es :" + ex));
+        fluxString.subscribe(System.out::println,
+                             ex -> System.err.println("El error es :" + ex),
+                             () -> System.out.println("Completado"));
     }
 }
