@@ -73,4 +73,11 @@ class FluxMonoTest {
                 .expectNext("unico")
                 .verifyComplete();
     }
+
+    @Test
+    void monoTest_WithError(){
+        StepVerifier.create( Mono.error(new RuntimeException("Exception generated voluntarily")).log())
+                .expectError(RuntimeException.class)
+                .verify();
+    }
 }
