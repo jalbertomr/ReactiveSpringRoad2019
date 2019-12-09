@@ -41,4 +41,15 @@ class FluxMonoTest {
                 .expectErrorMessage("Exception generated voluntarily")
                 .verify();
     }
+
+    @Test
+    void fluxElementsCount_WithError(){
+        Flux<String> fluxString = Flux.just("Elemento1","Elemento2","Elemento3")
+                .concatWith( Flux.error( new RuntimeException("Exception generated voluntarily")))
+                .log();
+        StepVerifier.create( fluxString)
+                .expectNextCount(3)
+                .expectErrorMessage("Exception generated voluntarily")
+                .verify();
+    }
 }
