@@ -8,7 +8,8 @@ class FluxMonoTest {
     @Test
     void fluxTest() {
         Flux<String> fluxString = Flux.just("Elemento1", "Elemento2", "Elemento3")
-                .concatWith( Flux.error( new RuntimeException("Exception generated voluntarily")));
+                .concatWith( Flux.error( new RuntimeException("Exception generated voluntarily")))
+                .log();
         fluxString.subscribe(System.out::println, System.err::println);
     }
 }
