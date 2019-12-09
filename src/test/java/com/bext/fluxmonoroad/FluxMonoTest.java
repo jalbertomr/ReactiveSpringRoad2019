@@ -10,6 +10,6 @@ class FluxMonoTest {
         Flux<String> fluxString = Flux.just("Elemento1", "Elemento2", "Elemento3")
                 .concatWith( Flux.error( new RuntimeException("Exception generated voluntarily")))
                 .log();
-        fluxString.subscribe(System.out::println, System.err::println);
+        fluxString.subscribe(System.out::println, ex ->System.err.println("El error es :" + ex));
     }
 }
