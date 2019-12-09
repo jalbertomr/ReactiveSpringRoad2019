@@ -25,7 +25,19 @@ class FluxMonoTest {
         StepVerifier.create( fluxString)
                 .expectNext("Elemento1")
                 .expectNext("Elemento2")
-                .expectNext("Elemento3");
-                //.verifyComplete();
+                .expectNext("Elemento3")
+                .verifyComplete();
+    }
+
+    @Test
+    void fluxElements_WithError(){
+        Flux<String> fluxString = Flux.just("Elemento1","Elemento2","Elemento3")
+                .concatWith( Flux.error( new RuntimeException("Exception generated voluntarily")))
+                .log();
+        StepVerifier.create( fluxString)
+                .expectNext("Elemento1")
+                .expectNext("Elemento2")
+                .expectNext("Elemento3")
+                .verifyComplete();
     }
 }
