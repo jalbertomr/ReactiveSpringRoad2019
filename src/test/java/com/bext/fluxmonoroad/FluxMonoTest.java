@@ -38,6 +38,7 @@ class FluxMonoTest {
                 .expectNext("Elemento1")
                 .expectNext("Elemento2")
                 .expectNext("Elemento3")
-                .verifyComplete();
+                .expectError(RuntimeException.class)
+                .verify();
     }
 }
