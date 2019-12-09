@@ -23,9 +23,9 @@ class FluxMonoTest {
         Flux<String> fluxString = Flux.just("Elemento1","Elemento2","Elemento3")
                 .log();
         StepVerifier.create( fluxString)
-                .expectNext("Elemento3")
-                .expectNext("Elemento2")
                 .expectNext("Elemento1")
-                .verifyComplete();
+                .expectNext("Elemento2")
+                .expectNext("Elemento3");
+                //.verifyComplete();
     }
 }
