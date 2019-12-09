@@ -38,7 +38,7 @@ class FluxMonoTest {
                 .expectNext("Elemento1")
                 .expectNext("Elemento2")
                 .expectNext("Elemento3")
-                .expectError(RuntimeException.class)
+                .expectErrorMessage("Exception generated voluntarily")
                 .verify();
     }
 }
