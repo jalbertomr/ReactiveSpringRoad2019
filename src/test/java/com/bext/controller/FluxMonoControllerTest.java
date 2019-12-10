@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.Arrays;
@@ -97,5 +98,33 @@ class FluxMonoControllerTest {
                 .expectNext(2L)
                 .thenCancel()
                 .verify();
+    }
+
+    @Test
+    void mono_WebClient01(){
+        Integer expectedValue = new Integer(1);
+
+        EntityExchangeResult<Integer> entityExchangeResult = webTestClient.get().uri("/mono")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Integer.class)
+                .returnResult();
+
+        assertEquals( expectedValue, entityExchangeResult.getResponseBody());
+    }
+
+    @Test
+    void mono_WebClient02(){
+        Integer expectedValue = new Integer(1);
+
+        webTestClient.get().uri("/mono")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Integer.class)
+                .consumeWith( response -> {
+                        assertEquals( expectedValue, response.getResponseBody());
+                });
     }
 }
