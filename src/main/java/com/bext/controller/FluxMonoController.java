@@ -17,9 +17,8 @@ public class FluxMonoController {
     }
 
     @GetMapping(value = "/fluxstream", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
-    public Flux<Integer> fluxStream() {
-        return Flux.just(1,2,3,4)
-                .delayElements(Duration.ofSeconds(1))
+    public Flux<Long> fluxStream() {
+        return Flux.interval(Duration.ofSeconds(1))  //generate infinite succesive values
                 .log();
     }
 
