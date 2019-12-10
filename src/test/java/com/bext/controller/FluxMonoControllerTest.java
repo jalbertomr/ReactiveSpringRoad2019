@@ -83,6 +83,21 @@ class FluxMonoControllerTest {
     }
 
     @Test
+    public void fluxString_webClient01() {
+        Flux<String> fluxString = webTestClient.get().uri("/fluxString")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isOk()
+                .returnResult(String.class)
+                .getResponseBody();
+
+        StepVerifier.create( fluxString)
+                .expectSubscription()
+                .expectNext("Elemento1Elemento2Elemento3Elemento4")
+                .verifyComplete();
+    }
+
+    @Test
     void fluxStream() {
         Flux<Long> fluxLong = webTestClient.get().uri("/fluxstream")
                 .accept(MediaType.APPLICATION_STREAM_JSON)

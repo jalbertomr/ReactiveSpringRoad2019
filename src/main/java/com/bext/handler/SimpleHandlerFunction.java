@@ -7,6 +7,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Component
 public class SimpleHandlerFunction {
 
@@ -18,7 +20,7 @@ public class SimpleHandlerFunction {
 
     public Mono<ServerResponse> fluxString(ServerRequest serverRequest) {
         return ServerResponse.ok()
-                .contentType(MediaType.TEXT_PLAIN)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body( Flux.just("Elemento1","Elemento2","Elemento3","Elemento4").log(), String.class);
     }
 
